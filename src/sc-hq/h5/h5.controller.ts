@@ -1,10 +1,10 @@
-import { Controller, Get, Post, Body, Param, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Query } from '@nestjs/common';
 
 import { H5Service } from './h5.service';
 import { CreateQtnDto } from './dto/create-qtn.dto';
 import { FindAllDto } from './dto/find-all.dto';
 
-@Controller('h5')
+@Controller('sc-hq/h5')
 export class H5Controller {
   constructor(private readonly h5Service: H5Service) {}
 

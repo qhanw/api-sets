@@ -2,12 +2,13 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
+// modules
 import { PrismaModule } from './prisma/prisma.module';
-import { H5Module } from './h5/h5.module';
-import { QtnModule } from './qtn/qtn.module';
+import { MeetModule } from './meet/meet.module';
+import { ScHqModule } from './sc-hq/sc-hq.module';
 
 @Module({
-  imports: [PrismaModule, H5Module, QtnModule],
+  imports: [PrismaModule, MeetModule, ScHqModule],
   controllers: [AppController],
   providers: [AppService],
 })

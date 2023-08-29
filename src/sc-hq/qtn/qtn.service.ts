@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateQtnDto } from './dto/create-qtn.dto';
 import { UpdateQtnDto } from './dto/update-qtn.dto';
 import { QueryQtnDto } from './dto/query-qtn.dto';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class QtnService {

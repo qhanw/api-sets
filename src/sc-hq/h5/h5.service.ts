@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 
 import { CreateQtnDto } from './dto/create-qtn.dto';
 import { FindAllDto } from './dto/find-all.dto';
-import { PrismaService } from '../prisma/prisma.service';
+import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
 export class H5Service {

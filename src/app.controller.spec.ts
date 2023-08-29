@@ -15,8 +15,9 @@ describe('AppController', () => {
   });
 
   describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(appController.getHello()).toBe('Hello World!');
-    });
+    // API 服务不显示根页面
+    // it('should return "Hello World!"', () => {
+    //   expect(appController.getHello()).toBe('Hello World!');
+    // });
   });
 });

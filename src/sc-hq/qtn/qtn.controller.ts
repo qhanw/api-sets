@@ -13,7 +13,7 @@ import { CreateQtnDto } from './dto/create-qtn.dto';
 import { UpdateQtnDto } from './dto/update-qtn.dto';
 import { QueryQtnDto } from './dto/query-qtn.dto';
 
-@Controller('qtn')
+@Controller('sc-hq/qtn')
 export class QtnController {
   constructor(private readonly qtnService: QtnService) {}
 
