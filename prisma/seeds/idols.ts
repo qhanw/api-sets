@@ -24,15 +24,11 @@ export async function async_idol() {
   }: any = (await body.json()) || {};
 
   for (const p of idolList) {
-    const {
-      decodeName,
-      decodeTeam,
-      avatarPath,
-      createdAt,
-      updatedAt,
-      height,
-      ...others
-    } = p;
+    delete p.decodeName;
+    delete p.decodeTeam;
+    delete p.avatarPath;
+
+    const { createdAt, updatedAt, height, ...others } = p;
 
     const insertData = {
       ...others,
