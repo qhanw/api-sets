@@ -13,8 +13,8 @@ export class H5Service {
 
   findAll(params: FindAllDto) {
     console.log(params);
-    return this.prisma.list.findMany({
-      where: { age: { equals: +params.age } },
-    });
+    // return this.prisma.list.findMany({
+    //   where: { age: { equals: +params.age } },
+    // });
   }
 }

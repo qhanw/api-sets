@@ -117,3 +117,25 @@ model Projects {
   createdAt   DateTime? @db.Timestamptz(6)
   updateAt    DateTime? @db.Timestamptz(6)
 }
+
+model idols {
+  id                  BigInt    @id @unique @default(autoincrement())
+  realName            String?
+  englishName         String?
+  nickName            String?
+  avatar              String?
+  height              Int?
+  birthday            String?
+  constellation       String?
+  hobby               String?
+  speciality          String?
+  team                String?
+  interactWeibo       String?
+  interactXiaohongshu String?
+  videoNames          String?
+  videoLinks          String?
+  remark1             String?
+  remark2             String?
+  createdAt           DateTime? @db.Timestamptz(6)
+  updatedAt           DateTime? @db.Timestamptz(6)
+}
