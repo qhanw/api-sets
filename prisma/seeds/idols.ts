@@ -1,10 +1,11 @@
 import { request } from 'undici';
+import { TARGET } from './constant';
 import { db } from '../db.server';
 
 export async function async_idol() {
   console.log(`Start fetching data ...`);
   const { statusCode, headers, trailers, body } = await request(
-    'http://101.71.63.249/task/api/v1/idolManagement/idolList',
+    `${TARGET}/task/api/v1/idolManagement/idolList`,
     {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
@@ -21,8 +22,6 @@ export async function async_idol() {
   const {
     data: { idolList },
   }: any = (await body.json()) || {};
-
-  console.log('idolList', idolList);
 
   for (const p of idolList) {
     const {
