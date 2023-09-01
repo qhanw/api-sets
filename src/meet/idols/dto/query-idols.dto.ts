@@ -6,9 +6,9 @@ export class QueryIdolsDto {
   @ApiProperty()
   pageSize: number;
   @ApiProperty()
-  realName: string;
+  realName?: string;
   @ApiProperty()
-  city: string;
+  city?: string;
   @ApiProperty()
-  team: string;
+  team?: string;
 }
