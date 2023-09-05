@@ -3,12 +3,15 @@ import { CreateQtnDto } from './dto/create-qtn.dto';
 import { UpdateQtnDto } from './dto/update-qtn.dto';
 import { QueryQtnDto } from './dto/query-qtn.dto';
 import { PrismaService } from '../../prisma/prisma.service';
+import { convertBigInt } from '../../utils/utils';
 
 @Injectable()
 export class QtnService {
   constructor(private prisma: PrismaService) {}
-  create(createQtnDto: CreateQtnDto) {
-    return 'This action adds a new qtn';
+
+  create(data: CreateQtnDto) {
+    console.log(data);
+    return { code: 0, msg: 'success', data: null };
   }
 
   async find(query: QueryQtnDto) {
@@ -37,28 +40,21 @@ export class QtnService {
     });
 
     return {
-      data: {
-        pagination: { current: curr, pageSize: take, total },
-        list: JSON.parse(
-          JSON.stringify(
-            list,
-            (key, value) =>
-              typeof value === 'bigint' ? value.toString() : value, // return everything else unchanged
-          ),
-        ),
-      },
+      data: convertBigInt(list),
+      pagination: { current: curr, pageSize: take, total },
     };
   }
 
-  findOne(id: number) {
+  async findOne(id: number) {
     return `This action returns a #${id} qtn`;
   }
 
-  update(id: number, updateQtnDto: UpdateQtnDto) {
+  async update(id: number, updateQtnDto: UpdateQtnDto) {
+    console.log(updateQtnDto);
     return `This action updates a #${id} qtn`;
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     return `This action removes a #${id} qtn`;
   }
 }

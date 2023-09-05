@@ -17,16 +17,14 @@ import { QueryQtnDto } from './dto/query-qtn.dto';
 export class QtnController {
   constructor(private readonly qtnService: QtnService) {}
 
-  @Post()
+  @Post('create')
   create(@Body() createQtnDto: CreateQtnDto) {
     return this.qtnService.create(createQtnDto);
   }
 
   @Get()
-  findAll(@Query() query: QueryQtnDto) {
-    const lis = this.qtnService.find(query);
-    console.log(lis);
-    return lis;
+  find(@Query() query: QueryQtnDto) {
+    return this.qtnService.find(query);
   }
 
   @Get(':id')
