@@ -15,7 +15,7 @@ export class QtnService {
   }
 
   async find(query: QueryQtnDto) {
-    const { current, pageSize } = query;
+    const { current, pageSize, keyword } = query;
     const curr = +current || 1;
     const take = +pageSize || 10;
     const total = await this.prisma.qtn.count();
@@ -23,8 +23,9 @@ export class QtnService {
     const list = await this.prisma.qtn.findMany({
       skip: ((curr < 1 ? 1 : curr) - 1) * take,
       take,
-      orderBy: { tel: 'asc' },
+      // orderBy: { tel: 'asc' },
       select: {
+        id: true,
         tel: true,
         A1: true,
         A2: true,
@@ -37,6 +38,7 @@ export class QtnService {
         A9: true,
         A10: true,
       },
+      where: { A1: { contains: keyword } },
     });
 
     return {

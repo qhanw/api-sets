@@ -4,4 +4,6 @@ export class QueryQtnDto {
   current: number;
   @ApiProperty()
   pageSize: number;
+  @ApiProperty()
+  keyword?: string;
 }
