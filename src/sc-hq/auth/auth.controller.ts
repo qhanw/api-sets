@@ -2,7 +2,7 @@ import {
   Body,
   Controller,
   Get,
-  Headers,
+  Request,
   HttpCode,
   HttpStatus,
   Post,
@@ -24,8 +24,12 @@ export class AuthController {
 
   @UseGuards(AuthGuard)
   @Get('profile')
-  getProfile(@Headers() headers) {
-    return this.authService.profile(headers.authorization);
+  getProfile(@Request() req) {
+    if (req.user) {
+      return { code: 0, status: 'ok', msg: 'success', data: req.user };
+    } else {
+      return { code: -1, status: 'error', msg: 'failure', data: null };
+    }
   }
 
   @Get('get_code')

@@ -27,10 +27,12 @@ export class AuthGuard implements CanActivate {
       // 💡 We're assigning the payload to the request object here
       // so that we can access it in our route handlers
 
-      console.log(payload);
-      request['user'] = payload;
-    } catch {
-      throw new UnauthorizedException();
+      // eslint-disable-next-line
+      const { sub, exp, iat, ...rest } = payload;
+      request['user'] = rest;
+    } catch (e) {
+      console.error(JSON.stringify(e));
+      throw new UnauthorizedException(e);
     }
     return true;
   }

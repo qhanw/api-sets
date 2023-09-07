@@ -16,8 +16,20 @@ export class UsersService {
 
   // 用户配置
   private readonly users = [
-    { id: 1, username: 'admin', password: '123123' },
-    { id: 2, username: 'user', password: 'guess' },
+    {
+      id: 1,
+      username: 'admin',
+      password: '123123',
+      nickname: 'Qhan W',
+      avatar: 'https://qhan.wang/favicon.png',
+    },
+    {
+      id: 2,
+      username: 'user',
+      password: 'guess',
+      nickname: 'Qhan X',
+      avatar: 'https://qhan.wang/favicon.png',
+    },
   ];
 
   async findOne(username: string): Promise<User | undefined> {
