@@ -1,8 +1,10 @@
 import { Injectable } from '@nestjs/common';
 
 import { CreateQtnDto } from './dto/create-user.dto';
-import { LoginParamsDto } from './dto/login-params.dto';
 import { PrismaService } from '../../prisma/prisma.service';
+
+// This should be a real class/interface representing a user entity
+export type User = any;
 
 @Injectable()
 export class UsersService {
@@ -12,13 +14,13 @@ export class UsersService {
     return { code: 0, msg: 'success', data: null };
   }
 
-  login(data: LoginParamsDto) {
-    console.log(data);
+  // 用户配置
+  private readonly users = [
+    { id: 1, username: 'admin', password: '123123' },
+    { id: 2, username: 'user', password: 'guess' },
+  ];
 
-    if (data.username === 'admin' && data.password === '123456') {
-      return { code: 0, status: 'ok', msg: 'success', data: null };
-    } else {
-      return { code: -1, status: 'error', msg: 'failure', data: null };
-    }
+  async findOne(username: string): Promise<User | undefined> {
+    return this.users.find((user) => user.username === username);
   }
 }
