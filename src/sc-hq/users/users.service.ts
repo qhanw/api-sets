@@ -5,7 +5,7 @@ import { LoginParamsDto } from './dto/login-params.dto';
 import { PrismaService } from '../../prisma/prisma.service';
 
 @Injectable()
-export class UserService {
+export class UsersService {
   constructor(private prisma: PrismaService) {}
   create(data: CreateQtnDto) {
     console.log(data);

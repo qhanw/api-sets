@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 
-import { UserModule } from './user/user.module';
+import { UsersModule } from './users/users.module';
 import { QtnModule } from './qtn/qtn.module';
 
 /**
@@ -8,6 +8,6 @@ import { QtnModule } from './qtn/qtn.module';
  * @description Sichuan health questionnaire
  */
 @Module({
-  imports: [QtnModule, UserModule],
+  imports: [QtnModule, UsersModule],
 })
 export class ScHqModule {}

@@ -1,12 +1,12 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
 
-import { UserService } from './user.service';
+import { UsersService } from './users.service';
 import { CreateQtnDto } from './dto/create-user.dto';
 import { LoginParamsDto } from './dto/login-params.dto';
 
-@Controller('sc-hq/user')
-export class UserController {
-  constructor(private readonly userService: UserService) {}
+@Controller('sc-hq/users')
+export class UsersController {
+  constructor(private readonly usersService: UsersService) {}
 
   @Post('create')
   create(@Body() data: CreateQtnDto) {
@@ -25,6 +25,6 @@ export class UserController {
 
   @Post('login')
   login(@Body() data: LoginParamsDto) {
-    return this.userService.login(data);
+    return this.usersService.login(data);
   }
 }
