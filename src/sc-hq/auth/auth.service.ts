@@ -13,7 +13,11 @@ export class AuthService {
   async signIn(username: string, pass: string): Promise<any> {
     const user = await this.usersService.findOne(username);
     if (user?.password !== pass) {
-      throw new UnauthorizedException();
+      throw new UnauthorizedException({
+        statusCode: 401,
+        name: 'Unauthorized',
+        message: 'incorrect account or password',
+      });
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -27,5 +31,18 @@ export class AuthService {
       msg: 'success',
       data: await this.jwtService.signAsync(payload),
     };
+  }
+
+  async profile(username: string): Promise<any> {
+    const user = await this.usersService.findOne(username);
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...rest } = user;
+
+    if (rest) {
+      return { code: 0, status: 'ok', msg: 'success', data: rest };
+    } else {
+      return { code: -1, status: 'error', msg: 'failure', data: null };
+    }
   }
 }
