@@ -12,7 +12,12 @@ import { ExchangesController } from './exchanges/exchanges.controller';
 import { ExchangesService } from './exchanges/exchanges.service';
 
 @Module({
-  controllers: [IdolsController, CommonController, TasksController, ExchangesController],
+  controllers: [
+    IdolsController,
+    CommonController,
+    TasksController,
+    ExchangesController,
+  ],
   providers: [IdolsService, CommonService, TasksService, ExchangesService],
   imports: [PrismaModule],
 })
