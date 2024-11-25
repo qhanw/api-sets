@@ -7,19 +7,49 @@ import { convertBigInt } from '../../utils/utils';
 
 @Injectable()
 export class RoleService {
-  constructor(private prisma: PrismaService) {}
+  private roles: PrismaService['roles'];
+
+  constructor(private prisma: PrismaService) {
+    this.roles = this.prisma.roles;
+  }
+
+  private async checkRoleByName(data: CreateRoleDto | UpdateRoleDto) {
+    const { name } = data;
+    const isExist = await this.roles.findFirst({
+      where: { name: { equals: name } },
+    });
+
+    if (isExist) {
+      return { code: 0, msg: '角色名已存在，请重新输入！', data: null };
+    }
+  }
 
   async create(data: CreateRoleDto) {
     const { name, remark } = data;
-    const roles = this.prisma.roles;
-    const role = await roles.create({ data: { name, remark } });
+    const isExist = await this.roles.findFirst({
+      where: { name: { equals: name } },
+    });
+
+    if (isExist) {
+      return { code: 0, msg: '角色名已存在，请重新输入！', data: null };
+    }
+
+    const role = await this.roles.create({ data: { name, remark } });
     return { code: 200, msg: 'success', data: convertBigInt(role) };
   }
 
   async update(data: UpdateRoleDto) {
-    const roles = this.prisma.roles;
     const { name, remark } = data;
-    const role = await roles.update({
+
+    const isExist = await this.roles.findFirst({
+      where: { name: { equals: name } },
+    });
+
+    if (isExist) {
+      return { code: 0, msg: '角色名已存在，请重新输入！', data: null };
+    }
+
+    const role = await this.roles.update({
       where: { id: BigInt(data.id) },
       data: { name, remark },
     });
@@ -32,11 +62,11 @@ export class RoleService {
     const curr = +current || 1;
     const take = +pageSize || 10;
 
-    const $table = this.prisma.roles;
+    const total = await this.roles.count({
+      where: { name: { contains: name } },
+    });
 
-    const total = await $table.count({ where: { name: { contains: name } } });
-
-    const list = await this.prisma.roles.findMany({
+    const list = await this.roles.findMany({
       where: { name: { contains: name } },
       skip: ((curr < 1 ? 1 : curr) - 1) * take,
       take,
@@ -57,7 +87,7 @@ export class RoleService {
   }
 
   async remove(id: number) {
-    const role = await this.prisma.roles.delete({ where: { id: id } });
+    const role = await this.roles.delete({ where: { id: id } });
 
     return { code: 200, msg: 'success', data: convertBigInt(role) };
   }
