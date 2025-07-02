@@ -50,7 +50,7 @@ export class RoleService {
     }
 
     const role = await this.roles.update({
-      where: { id: BigInt(data.id) },
+      where: { id: +data.id },
       data: { name, remark },
     });
 
